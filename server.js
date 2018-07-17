@@ -18,6 +18,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.json({ type: 'application/vnd.api+json'}));
 app.use(methodOverride());
 
+app.get('*', function(req,res){
+  res.sendfile('./public/index.html');
+})
 
 // listen + start the app ============================================
 app.listen('9090')
