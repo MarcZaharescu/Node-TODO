@@ -24,13 +24,15 @@ export class Form extends React.Component {
       this._inputElement.value = "";
     }
 
-    console.log("test", this.state.itemList);
-
     e.preventDefault();
   }
 
-  deleteItem(e) {
-    console.log('e',e)
+  deleteItem(e, index) {
+    this.state.itemList.splice(index, 1);
+    this.setState({ itemList: this.state.itemList });
+  }
+
+  deleteAll(e) {
     this.setState({ itemList: [] });
   }
 
@@ -60,7 +62,7 @@ export class Form extends React.Component {
                     {item.text}
 
                     <button
-                      onClick={e => this.deleteItem(e)}
+                      onClick={e => this.deleteItem(e, index)}
                       className="label label-info"
                     >
                       {"x"}
