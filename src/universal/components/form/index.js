@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import ListItem from "./listItem";
 
 export class Form extends React.Component {
   constructor(...args) {
@@ -40,7 +41,7 @@ export class Form extends React.Component {
     return (
       <div id="todo-form" className="row">
         <div className="col-sm-8 col-sm-offset-2 text-center">
-          <form onSubmit={this.addItem}>
+          <form>
             <div className="form-group">
               <input
                 type="text"
@@ -51,32 +52,28 @@ export class Form extends React.Component {
               />
               <ul>
                 {this.state.itemList.map((item, index) => (
-                  <li
-                    type="text"
-                    className="form-control input-lg text-center"
-                    placeholder="Add text here"
-                    ng-model="formData.text"
-                  >
-                    <span className="label label-info">{index}</span>
-
-                    {item.text}
-
-                    <button
-                      onClick={e => this.deleteItem(e, index)}
-                      className="label label-info"
-                    >
-                      {"x"}
-                    </button>
-                  </li>
+                  <ListItem
+                    text={item.text}
+                    index={index}
+                    deleteItem={this.deleteItem}
+                  />
                 ))}
               </ul>
             </div>
             <button
               className="submit"
               className="btn btn-primary btn-lg"
-              type="submit"
+              onClick={e => this.addItem(e)}
             >
               {"Add"}
+            </button>
+
+            <button
+              className="submit"
+              className="btn btn-primary btn-lg"
+              onClick={e => this.deleteAll(e)}
+            >
+              {"Remove All"}
             </button>
           </form>
         </div>
